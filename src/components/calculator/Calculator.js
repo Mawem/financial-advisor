@@ -39,8 +39,8 @@ class Calculator extends React.Component {
       };
       ideal = { ...ideal, [key]: portfolioAmount.toFixed(1).toString() };
     });
-    // recomendations
-    let transactions = this.transactionRecomendations(
+    // recommendations
+    let transactions = this.transactionRecommendations(
       formPortfolio,
       difference,
       ideal
@@ -49,74 +49,77 @@ class Calculator extends React.Component {
     this.setState({ rebalanceResult: { difference, ideal, transactions } });
   };
 
-  transactionRecomendations(formPortfolio, difference) {
-    let recomendations = [];
-    let diffForRecomendation = { ...difference };
+  transactionRecommendations(formPortfolio, difference) {
+    let recommendations = [];
+    let diffForRecommendation = { ...difference };
     Object.keys(formPortfolio).forEach((keyTransfer) => {
-      let differenceRecomendationTransfer = parseFloat(
-        diffForRecomendation[keyTransfer]
+      let differenceRecommendationTransfer = parseFloat(
+        diffForRecommendation[keyTransfer]
       );
-      if (differenceRecomendationTransfer < 0) {
+      if (differenceRecommendationTransfer < 0) {
         Object.keys(formPortfolio).forEach((keyRecibe) => {
-          let differenceRecomendationRecibe = parseFloat(
-            diffForRecomendation[keyRecibe]
+          let differenceRecommendationRecibe = parseFloat(
+            diffForRecommendation[keyRecibe]
           );
-          if (differenceRecomendationRecibe > 0) {
-            differenceRecomendationRecibe =
-              parseFloat(differenceRecomendationRecibe) +
-              parseFloat(differenceRecomendationTransfer);
-            if (differenceRecomendationRecibe === 0) {
-              recomendations.push(
+          if (differenceRecommendationRecibe > 0) {
+            differenceRecommendationRecibe =
+              parseFloat(differenceRecommendationRecibe) +
+              parseFloat(differenceRecommendationTransfer);
+            if (differenceRecommendationRecibe === 0) {
+              recommendations.push(
                 "Transfer $" +
-                  Math.abs(differenceRecomendationTransfer).toFixed(1) +
+                  Math.abs(differenceRecommendationTransfer).toFixed(1) +
                   " from " +
                   keyTransfer +
                   " to " +
                   keyRecibe +
                   "."
               );
-              diffForRecomendation[
+              diffForRecommendation[
                 keyRecibe
-              ] = differenceRecomendationRecibe.toString();
+              ] = differenceRecommendationRecibe.toString();
               return;
-            } else if (differenceRecomendationRecibe < 0) {
-              differenceRecomendationTransfer = diffForRecomendation[keyRecibe];
-              recomendations.push(
+            } else if (differenceRecommendationRecibe < 0) {
+              differenceRecommendationTransfer =
+               
+               
+                diffForRecommendation[keyRecibe];
+              recommendations.push(
                 "Transfer $" +
-                  Math.abs(differenceRecomendationTransfer).toFixed(1) +
+                  Math.abs(differenceRecommendationTransfer).toFixed(1) +
                   " from " +
                   keyTransfer +
                   " to " +
                   keyRecibe +
                   "."
               );
-              differenceRecomendationTransfer = differenceRecomendationRecibe.toString();
-              diffForRecomendation[keyRecibe] = 0;
+              differenceRecommendationTransfer = differenceRecommendationRecibe.toString();
+              diffForRecommendation[keyRecibe] = 0;
               return;
             } else if (
-              differenceRecomendationRecibe > 0 &&
-              differenceRecomendationTransfer !== 0
+              differenceRecommendationRecibe > 0 &&
+              differenceRecommendationTransfer !== 0
             ) {
-              recomendations.push(
+              recommendations.push(
                 "Transfer $" +
-                  Math.abs(differenceRecomendationTransfer).toFixed(1) +
+                  Math.abs(differenceRecommendationTransfer).toFixed(1) +
                   " from " +
                   keyTransfer +
                   " to " +
                   keyRecibe +
                   "."
               );
-              differenceRecomendationTransfer = 0;
-              diffForRecomendation[
+              differenceRecommendationTransfer = 0;
+              diffForRecommendation[
                 keyRecibe
-              ] = differenceRecomendationRecibe.toString();
+              ] = differenceRecommendationRecibe.toString();
               return;
             }
           }
         });
       }
     });
-    return recomendations;
+    return recommendations;
   }
 
   handleInputChange = (e) => {
@@ -142,7 +145,7 @@ class Calculator extends React.Component {
         <div className="small-10 small-centered">
           <h3 className="text-center">Personalized Portfolio</h3>
           <Portfolio {...this.props.risk} />
-          <h3 className="text-center">Please Enter Your Current Portfolio</h3>
+          <h3 className="text-center balance-portfolio">Please Enter Your Current Portfolio</h3>
           <Balance
             {...this.props.risk}
             rebalance={this.rebalance}

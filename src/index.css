@@ -15,9 +15,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+.header-bar{
+  margin-bottom: 20px;
+}
+.top-bar, .top-bar ul {
+  background-color: rgb(216 241 249);
+}
 .color{
   background: rgb(172 226 243) !important;
+}
+.balance-portfolio{
+  margin-top: 25px ;
 }
 
 .risk-calculator-transfer{

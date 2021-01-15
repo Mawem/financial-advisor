@@ -11,6 +11,12 @@ const Balance = ({
     <div>
       <form onSubmit={rebalance}>
         <div className="grid-x grid-padding-x">
+          <div className="medium-12 cell grid-x grid-padding-x">
+            <h5 className="medium-4 cell">Current Amount</h5>
+            <h5 className="medium-2 cell">Difference</h5>
+            <h5 className="medium-2 cell">New Amount</h5>
+            <h5 className="medium-4 cell">RecommendedTransfer</h5>
+          </div>
           <div className="medium-8 cell grid-x grid-padding-x">
             {labels.map((label) => (
               <div key={label} className="medium-12 cell grid-x grid-padding-x">
@@ -63,7 +69,6 @@ const Balance = ({
           <button
             type="submit"
             className="hollow button float-right"
-            key="rebalance"
             disabled={!disableRebalance}
           >
             Rebalance
