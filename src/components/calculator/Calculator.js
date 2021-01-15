@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import Portfolio from "./portfolio/Portfolio";
 import Balance from "./balance/Balance";
 import { connect } from "react-redux";
@@ -51,7 +52,6 @@ class Calculator extends React.Component {
   transactionRecomendations(formPortfolio, difference) {
     let recomendations = [];
     let diffForRecomendation = { ...difference };
-    console.log(diffForRecomendation);
     Object.keys(formPortfolio).forEach((keyTransfer) => {
       let differenceRecomendationTransfer = parseFloat(
         diffForRecomendation[keyTransfer]
@@ -65,7 +65,6 @@ class Calculator extends React.Component {
             differenceRecomendationRecibe =
               parseFloat(differenceRecomendationRecibe) +
               parseFloat(differenceRecomendationTransfer);
-            console.log(differenceRecomendationTransfer);
             if (differenceRecomendationRecibe === 0) {
               recomendations.push(
                 "Transfer $" +
@@ -115,7 +114,6 @@ class Calculator extends React.Component {
             }
           }
         });
-        console.log(recomendations, diffForRecomendation);
       }
     });
     return recomendations;
@@ -140,6 +138,7 @@ class Calculator extends React.Component {
   render() {
     return (
       <div className="row align-center">
+        {this.props.risk.level === null ? <Redirect push to="/" /> : ""}
         <div className="small-10 small-centered">
           <h3 className="text-center">Personalized Portfolio</h3>
           <Portfolio {...this.props.risk} />

@@ -27,7 +27,6 @@ const Balance = ({
                 <fieldset className="medium-3 cell">
                   <input
                     type="text"
-                    key="difference"
                     disabled
                     value={
                       rebalanceResult.difference
@@ -39,7 +38,6 @@ const Balance = ({
                 <fieldset className="medium-3 cell">
                   <input
                     type="text"
-                    key="ideal"
                     disabled
                     value={
                       rebalanceResult.ideal
