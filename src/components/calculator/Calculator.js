@@ -34,10 +34,10 @@ class Calculator extends React.Component {
         ...difference,
         [key]:
           differenceAmount > 0
-            ? "+" + differenceAmount.toFixed(1).toString()
-            : differenceAmount.toFixed(1).toString(),
+            ? "+" + differenceAmount.toFixed(2).toString()
+            : differenceAmount.toFixed(2).toString(),
       };
-      ideal = { ...ideal, [key]: portfolioAmount.toFixed(1).toString() };
+      ideal = { ...ideal, [key]: portfolioAmount.toFixed(2).toString() };
     });
     // recommendations
     let transactions = this.transactionRecommendations(
@@ -67,7 +67,7 @@ class Calculator extends React.Component {
             if (differenceRecommendationRecibe === 0) {
               recommendations.push(
                 "Transfer $" +
-                  Math.abs(differenceRecommendationTransfer).toFixed(1) +
+                  Math.abs(differenceRecommendationTransfer).toFixed(2) +
                   " from " +
                   keyTransfer +
                   " to " +
@@ -85,7 +85,7 @@ class Calculator extends React.Component {
                 diffForRecommendation[keyRecibe];
               recommendations.push(
                 "Transfer $" +
-                  Math.abs(differenceRecommendationTransfer).toFixed(1) +
+                  Math.abs(differenceRecommendationTransfer).toFixed(2) +
                   " from " +
                   keyTransfer +
                   " to " +
@@ -101,7 +101,7 @@ class Calculator extends React.Component {
             ) {
               recommendations.push(
                 "Transfer $" +
-                  Math.abs(differenceRecommendationTransfer).toFixed(1) +
+                  Math.abs(differenceRecommendationTransfer).toFixed(2) +
                   " from " +
                   keyTransfer +
                   " to " +
