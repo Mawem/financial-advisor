@@ -42,8 +42,7 @@ class Calculator extends React.Component {
     // recommendations
     let transactions = this.transactionRecommendations(
       formPortfolio,
-      difference,
-      ideal
+      difference
     );
 
     this.setState({ rebalanceResult: { difference, ideal, transactions } });
