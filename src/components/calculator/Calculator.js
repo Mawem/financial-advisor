@@ -16,16 +16,30 @@ class Calculator extends React.Component {
   rebalance = (e) => {
     e.preventDefault();
     const { risk } = this.props;
+    let typeError = false;
     let ideal = {};
     let difference = {};
     let portfolio = risk.table.filter(
       (risk) => risk.risk === this.props.risk.level
     )[0];
     let formPortfolio = this.state.values;
-    let total = Object.keys(formPortfolio).reduce(
-      (sum, key) => sum + parseFloat(formPortfolio[key] || 0),
-      0
-    );
+    let total = Object.keys(formPortfolio).reduce((sum, key) => {
+      if (isNaN(formPortfolio[key])) {
+        return (typeError = true);
+      } else {
+        return sum + parseFloat(formPortfolio[key] || 0);
+      }
+    }, 0);
+    if (typeError) {
+      this.setState({
+        rebalanceResult: {
+          transactions: [
+            "Please use only positive digits or zero when entering current amounts. Please enter all inputs correctly.",
+          ],
+        },
+      });
+      return;
+    }
     // difference and ideal amount
     Object.keys(formPortfolio).forEach((key) => {
       let portfolioAmount = (portfolio[key] * total) / 100;
