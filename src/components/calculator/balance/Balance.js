@@ -27,6 +27,7 @@ const Balance = ({
                     id={label}
                     onChange={handleChange}
                     type="text"
+                    key={(((label + "input")))}
                     placeholder={label}
                   />
                 </fieldset>
@@ -34,6 +35,7 @@ const Balance = ({
                   <input
                     type="text"
                     disabled
+                    key={(((label + "diff")))}
                     value={
                       rebalanceResult.difference
                         ? rebalanceResult.difference[label]
@@ -45,6 +47,7 @@ const Balance = ({
                   <input
                     type="text"
                     disabled
+                    key={(((label + "ideal")))}
                     value={
                       rebalanceResult.ideal
                         ? rebalanceResult.ideal[label]
@@ -58,8 +61,8 @@ const Balance = ({
           <div className="medium-4 cell">
             <div className="medium-12 risk-calculator-transfer">
               {rebalanceResult.transactions
-                ? rebalanceResult.transactions.map((recomendation) => (
-                    <div>{recomendation}</div>
+                ? rebalanceResult.transactions.map((recomendation, i) => (
+                    <div key={i}>{recomendation}</div>
                   ))
                 : ""}
             </div>
